@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'profile' %}">Профиль</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'create_exam' %}">Создать тест</a></li>
+                    <li><a href="{% url 'logout' %}">Выход</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Контент страниц будет вставляться сюда -->
+        {% endblock %}
+    </main>
+</body>
+</html>

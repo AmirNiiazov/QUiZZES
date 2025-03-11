@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Добавить ответ к вопросу "{{ question.text }}"</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить ответ</button>
+  </form>
+  <a href="{% url 'add_question' exam_id=question.exam.id %}">Вернуться к вопросам</a>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Завершить создание теста</a>
+{% endblock %}
