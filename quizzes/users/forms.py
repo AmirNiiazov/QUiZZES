@@ -7,6 +7,13 @@ from .models import Profile
 
 # Форма для регистрации
 class RegisterForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Удалить help_text для всех полей
+        for field_name in self.fields:
+            self.fields[field_name].help_text = None
+
     email = forms.EmailField()
 
     class Meta:
