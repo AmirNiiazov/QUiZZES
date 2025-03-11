@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Прохождение теста "{{ exam.title }}"</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {% for question in questions %}
+      <div>
+        <p>{{ question.text }}</p>
+        <input type="text" name="question_{{ question.id }}" placeholder="Введите ваш ответ">
+      </div>
+    {% endfor %}
+    <button type="submit">Завершить тест</button>
+  </form>
+{% endblock %}

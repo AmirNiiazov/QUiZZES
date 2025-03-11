@@ -6,7 +6,7 @@ class Exam(models.Model):
     title = models.CharField(max_length=200)  # Название теста
     description = models.TextField()  # Описание теста
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)  # Автор теста (ссылка на пользователя)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Автор теста (ссылка на пользователя)
 
     def __str__(self):
         return self.title
@@ -29,7 +29,7 @@ class Answer(models.Model):
     text = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.text
+        return f"Ответ {self.question.order}: {self.question.exam}"
 
 
 class Result(models.Model):
@@ -40,3 +40,13 @@ class Result(models.Model):
 
     def __str__(self):
         return f"Результат для {self.user.username} - {self.score} баллов"
+
+
+class UserAnswer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user_answer = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"Ответ пользователя {self.user} на вопрос {self.question.id}"

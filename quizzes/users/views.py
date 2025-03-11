@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
+
+from exams.models import Exam
 from .forms import RegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -44,7 +46,18 @@ def profile(request):
             return redirect('profile')  # Перенаправляем обратно на профиль
     else:
         form = ProfileForm(instance=request.user.profile)
-    return render(request, 'users/profile.html', {'form': form})
+    user_exams = Exam.objects.filter(user=request.user)
+    return render(request, 'users/profile.html', {'form': form, 'user_exams': user_exams})
+
+
+@login_required
+def delete_user_exam(request, user_exam_id):
+    try:
+        user_exam = Exam.objects.get(id=user_exam_id, user=request.user)
+        user_exam.delete()
+    except Exam.DoesNotExist:
+        pass
+    return redirect('profile')
 
 
 # Выход пользователя
