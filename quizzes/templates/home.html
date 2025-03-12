@@ -13,8 +13,8 @@
   <!-- Список тестов -->
   <ul class="exam-list">
     {% for exam in page_obj %}
-      <li class="exam-item">
-        <a href="{% url 'start_exam' exam_id=exam.id %}" class="exam-title">{{ exam.title }}</a>
+      <li class="exam-item_main">
+        <a href="{% url 'start_exam' exam_id=exam.id %}" class="exam-title_main">{{ exam.title }}</a>
         <p class="exam-description">{{ exam.description }}</p>
       </li>
     {% endfor %}

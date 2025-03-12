@@ -26,7 +26,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')  # Ссылка на вопрос
-    text = models.CharField(max_length=255)
+    text = models.CharField(max_length=255, verbose_name='Ответ')
 
     def __str__(self):
         return f"Ответ {self.question.order}: {self.question.exam}"
