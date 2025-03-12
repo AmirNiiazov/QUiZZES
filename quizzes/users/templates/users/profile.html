@@ -9,19 +9,25 @@
     <button type="submit">Сохранить изменения</button>
   </form>
 
+  <br>
   <h3>Мои тесты</h3>
+
   {% if user_exams %}
-    <ul>
-      {% for user_exam in user_exams %}
-        <li>
-          <strong>{{ user_exam.title }}</strong> - {{ user_exam.description }}
-          <form method="POST" action="{% url 'delete_user_exam' user_exam.id %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit">Удалить</button>
-          </form>
-        </li>
-      {% endfor %}
+    <form method="POST" action="{% url 'delete_selected_exams' %}">
+    {% csrf_token %}
+    <ul class="exam-list">
+        {% for user_exam in user_exams %}
+            <li class="exam-item">
+                <input type="checkbox" name="selected_exams" value="{{ user_exam.id }}" class="exam-checkbox">
+                <div class="exam-info">
+                    <strong>{{ user_exam.title }}</strong>
+                    <p>{{ user_exam.description }}</p>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
+    <button type="submit" class="delete-btn">Удалить выбранные</button>
+</form>
   {% else %}
     <p>Вы не создали ни одного теста</p>
   {% endif %}

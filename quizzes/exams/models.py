@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Exam(models.Model):
-    title = models.CharField(max_length=200)  # Название теста
-    description = models.TextField()  # Описание теста
+    title = models.CharField(max_length=200, verbose_name='Название теста')  # Название теста
+    description = models.TextField(verbose_name='Описание теста')  # Описание теста
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Автор теста (ссылка на пользователя)
 

@@ -51,12 +51,11 @@ def profile(request):
 
 
 @login_required
-def delete_user_exam(request, user_exam_id):
-    try:
-        user_exam = Exam.objects.get(id=user_exam_id, user=request.user)
-        user_exam.delete()
-    except Exam.DoesNotExist:
-        pass
+def delete_selected_exams(request):
+    if request.method == "POST":
+        selected_exam_ids = request.POST.getlist("selected_exams")  # Получаем список ID
+        if selected_exam_ids:
+            Exam.objects.filter(id__in=selected_exam_ids, user=request.user).delete()  # Удаляем только тесты пользователя
     return redirect('profile')
 
 

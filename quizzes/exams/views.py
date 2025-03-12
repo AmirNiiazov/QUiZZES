@@ -50,7 +50,7 @@ def add_answer(request, question_id):
             answer.question = question  # Связать ответ с вопросом
             answer.save()
             # Можно добавить логику для перехода на страницу завершения создания
-            return redirect('add_answer', question_id=question.id)
+            return redirect('add_question', exam_id=question.exam.id)
     else:
         answer_form = AnswerForm()
 

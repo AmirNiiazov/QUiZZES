@@ -1,30 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}  <!-- Добавляем загрузку статических файлов -->
 
 {% block content %}
-  <h2>Доступные тесты</h2>
+  <h2 class="page-title">Доступные тесты</h2>
 
   <!-- Поисковая строка -->
-  <form method="GET" action="{% url 'home' %}">
+  <form method="GET" action="{% url 'home' %}" class="search-form">
     <input type="text" name="q" value="{{ search_query }}" placeholder="Поиск по названию теста">
     <button type="submit">Поиск</button>
   </form>
 
   <!-- Список тестов -->
-  <ul>
+  <ul class="exam-list">
     {% for exam in page_obj %}
-      <li>
-        <a href="{% url 'start_exam' exam_id=exam.id %}">{{ exam.title }}</a>  <!-- Изменена ссылка на начало теста -->
-        <p>{{ exam.description }}</p>
+      <li class="exam-item">
+        <a href="{% url 'start_exam' exam_id=exam.id %}" class="exam-title">{{ exam.title }}</a>
+        <p class="exam-description">{{ exam.description }}</p>
       </li>
     {% endfor %}
   </ul>
-
+<br>
   <!-- Пагинация -->
   <div class="pagination">
     <span class="step-links">
       {% if page_obj.has_previous %}
-        <a href="?page=1&q={{ search_query }}">Первая</a>
-        <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query }}">Предыдущая</a>
+        <a href="?page=1&q={{ search_query }}" class="pagination-link">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query }}" class="pagination-link">Предыдущая</a>
       {% endif %}
 
       <span class="current">
@@ -32,8 +33,8 @@
       </span>
 
       {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}&q={{ search_query }}">Следующая</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ search_query }}">Последняя</a>
+        <a href="?page={{ page_obj.next_page_number }}&q={{ search_query }}" class="pagination-link">Следующая</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ search_query }}" class="pagination-link">Последняя</a>
       {% endif %}
     </span>
   </div>
