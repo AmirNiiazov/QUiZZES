@@ -202,13 +202,13 @@ ul {
 }
 
 /* Список тестов */
-.exam-list {
+.exam-list_main {
     list-style-type: none; /* Убираем маркеры */
     padding: 0;
     margin: 0;
 }
 
-.exam-item {
+.exam-item_main {
     background-color: #f8f9fa;
     border: 1px solid #e1e1e1;
     border-radius: 8px;
@@ -217,18 +217,18 @@ ul {
     transition: box-shadow 0.3s ease;
 }
 
-.exam-item:hover {
+.exam-item_main:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.exam-title {
+.exam-title_main {
     font-size: 20px;
     font-weight: bold;
     color: #007bff;
     text-decoration: none;
 }
 
-.exam-title:hover {
+.exam-title_main:hover {
     text-decoration: underline;
 }
 
