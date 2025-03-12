@@ -280,7 +280,7 @@ ul {
     transform: scale(1.2);
     cursor: pointer;
     position: absolute;
-    right: 120px; /* Чекбокс в 5 пикселях от левого края */
+    right: 150px; /* Чекбокс в 5 пикселях от левого края */
 }
 
 .exam-info {
