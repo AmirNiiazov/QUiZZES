@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from exams.models import Exam
 
+
 def home(request):
     if not request.user.is_authenticated:
         # Если пользователь не авторизован, показываем страницу с приветствием
